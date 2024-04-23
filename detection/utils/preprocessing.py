@@ -29,7 +29,8 @@ class DementiaImageDataset:
             with Image.open(image_path) as img:
                 img = img.resize(self.size)
                 img = img.convert('RGB') 
-                return np.asarray(img)
+                img_arr = np.asarray(img)/255.0
+                return img_arr
         except IOError as e:
             print(f"Could not open image {image_path}: {e}")
             return None
@@ -46,10 +47,15 @@ class DementiaImageDataset:
                     encoded_label = self.one_hot_encode(label, len(self.category_labels))
                     self.encoded_labels.append(encoded_label)
 
-    def split_data(self, test_size=0.2, val_size=0.5):
+    def split_data(self, test_size=0.2, val_size=0.5, split = True):
         X = np.array(self.image_data)
         Y = np.array(self.encoded_labels)
-        X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=test_size, random_state=42)
-        X_val, X_test, Y_val, Y_test = train_test_split(X_test, Y_test, test_size=val_size, random_state=42)
-        return X_train, X_val, X_test, Y_train, Y_val, Y_test
+        #print("Data shape:", X.shape)
+        # X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=test_size, random_state=42)
+        #X_val, X_test, Y_val, Y_test = train_test_split(X_test, Y_test, test_size=val_size, random_state=42)
+        if split:
+            X_train, X_val, Y_train, Y_val = train_test_split(X, Y, test_size=test_size, random_state=42)
+            return X_train, X_val, Y_train, Y_val
+        else:
+            return X, Y
 
