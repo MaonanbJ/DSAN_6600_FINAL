@@ -12,4 +12,4 @@ Data/
 - Very_Mild_Dementia
 
 #### Model Weight
-The weights of our ResNet34 model can be downloaded [here](https://drive.google.com/file/d/11HSYnTQcIsCPmOSxahNo-FbGKKqT-pst/view?usp=sharing)
+The ResNet34 model weights trained by us can be downloaded [here](https://drive.google.com/file/d/11HSYnTQcIsCPmOSxahNo-FbGKKqT-pst/view?usp=sharing).
